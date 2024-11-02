@@ -1,4 +1,4 @@
-import Button from "./Button";
+import {Button} from "@/components/ui/Button";
 import Hero from "./Hero";
 import Navigation from "./Navigation";
 
@@ -11,7 +11,7 @@ function App() {
       <Navigation name={name} cartCount={cartCount} />
       <Hero />
       <div className="p-4">
-        <Button>Buy Now</Button>
+        <Button variant="destructive">Buy Now</Button>
       </div>
     </div>
   );

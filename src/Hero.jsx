@@ -1,4 +1,5 @@
 import "./Hero.css";
+import { Button } from "@/components/ui/button";
 
 function Hero() {
   return (
@@ -11,9 +12,9 @@ function Hero() {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quos
             suscipit est autem quia? Voluptatem?
           </p>
-          <a to="/shop" className="shop-now-btn">
-            Shop Now
-          </a>
+          <Button className="w-fit" asChild>
+            <a to="/shop">Shop Now</a>
+          </Button>
         </div>
         <div className="hero-image-container">
           <img

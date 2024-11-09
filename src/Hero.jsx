@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 function Hero() {
   return (
-    <section className="hero-section">
+    <section className="px-8 py-8">
       <div className="hero-container">
         <div className="hero-content">
           <span className="discount-badge">WEEKLY DISCOUNT</span>

@@ -2,6 +2,7 @@ import ProductCards from "./ProductCards";
 import { Separator } from "@/components/ui/separator";
 import Tab from "./Tab";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 function Products() {
   const products = [
@@ -94,18 +95,52 @@ function Products() {
       ? products
       : products.filter((product) => product.categoryId === selectedCategoryId);
 
-    const handleTabClick = (_id) => {
-        setSelectedCategoryId(_id)
+  const handleTabClick = (_id) => {
+    setSelectedCategoryId(_id);
+  };
+
+  const getProducts = async () => {
+    // const data = fetch("http://localhost:8000/api/products", {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    // console.log(data);
+    // data
+    //   .then((res) => {
+    //     console.log(res);
+    //     const dataPromise = res.json();
+    //     console.log(dataPromise);
+    //     return dataPromise;
+    //   })
+    //   .then((data) => console.log(data))
+    //   .catch((err) => console.log(err));
+    try {
+      const res = await fetch("http://localhost:8000/api/products", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);      
     }
+  };
 
   return (
     <section className="px-8 py-8">
       <h2 className="text-4xl font-bold">Our Top Products</h2>
+      <div>
+        <Button onClick={() => getProducts()}>GET Products</Button>
+      </div>
       <Separator className="mt-2" />
       <div className="mt-4 flex items-center gap-4">
         {categories.map((category) => (
           <Tab
-            key={category._id}  
+            key={category._id}
             _id={category._id}
             selectedCategoryId={selectedCategoryId}
             name={category.name}

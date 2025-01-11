@@ -57,7 +57,7 @@ function Products(props) {
         <Separator className="mt-2" />
         <div className="mt-4 flex items-center gap-4"></div>
         <div className="mt-4">
-          <p className="text-red-500">{`${productsError.message} ${categoriesError.message}`}</p>
+          {/* <p className="text-red-500">{`${productsError.message} ${categoriesError.message}`}</p> */}
         </div>
       </section>
     );

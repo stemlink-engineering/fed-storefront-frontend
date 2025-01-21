@@ -4,21 +4,26 @@ import { useState } from "react";
 import { Skeleton } from "./components/ui/skeleton";
 import ProductCards from "./ProductCards";
 import Tab from "./Tab";
+import { useUser } from "@clerk/clerk-react";
+import { skipToken } from "@reduxjs/toolkit/query";
+import { Navigate } from "react-router";
 
 function Products(props) {
+  const { isLoaded: isAuthLoaded, isSignedIn, user } = useUser();
+
   const {
     data: products,
     isLoading: isProductsLoading,
     isError: isProductsError,
     error: productsError,
-  } = useGetProductsQuery();
+  } = useGetProductsQuery(isAuthLoaded && isSignedIn ? undefined : skipToken);
 
   const {
     data: categories,
     isLoading: isCategoriesLoading,
     isError: isCategoriesError,
     error: categoriesError,
-  } = useGetCategoriesQuery();
+  } = useGetCategoriesQuery(isAuthLoaded && isSignedIn ? undefined : skipToken);
 
   const [selectedCategoryId, setSelectedCategoryId] = useState("ALL");
   const filteredProducts =
@@ -30,7 +35,11 @@ function Products(props) {
     setSelectedCategoryId(_id);
   };
 
-  if (isProductsLoading || isCategoriesLoading) {
+  if (!isSignedIn) {
+    return <Navigate to="/sign-in" />;
+  }
+
+  if (!isAuthLoaded || isProductsLoading || isCategoriesLoading) {
     return (
       <section className="px-8 py-8">
         <h2 className="text-4xl font-bold">Our Top Products</h2>

@@ -24,8 +24,8 @@ function Navigation(props) {
           Mebius
         </a>
         <div className="flex items-center gap-4">
-          <a href="/">Home</a>
-          <a href="/shop">Shop</a>
+          <Link to="/">Home</Link>
+          <Link to="/shop">Shop</Link>
         </div>
       </div>
       <div className="flex items-center gap-4">

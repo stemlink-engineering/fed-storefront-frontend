@@ -35,7 +35,7 @@ function Products(props) {
     setSelectedCategoryId(_id);
   };
 
-  if (!isSignedIn) {
+  if (isAuthLoaded && !isSignedIn) {
     return <Navigate to="/sign-in" />;
   }
 

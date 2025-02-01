@@ -1,10 +1,10 @@
+import { Button } from "@/components/ui/button";
 import Navigation from "@/Navigation";
 import { useSelector } from "react-redux";
 import { Link } from "react-router";
 
 function CartPage() {
   const cart = useSelector((state) => state.cart.value);
-  console.log(cart);
 
   return (
     <main className="px-8">
@@ -15,11 +15,15 @@ function CartPage() {
             <p>{item.product.name}</p>
             <p>{item.product.price}</p>
             <p>{item.quantity}</p>
-          </div>    
+          </div>
         ))}
       </div>
 
-      <Link to="/shop/checkout">Proceed Checkout</Link>
+      <div className="mt-4">
+        <Button asChild>
+          <Link to="/shop/checkout">Proceed to Checkout</Link>
+        </Button>
+      </div>
     </main>
   );
 }

@@ -22,6 +22,9 @@ export const Api = createApi({
     getCategories: builder.query({
       query: () => `categories`,
     }),
+    getOrder: builder.query({
+      query: (id) => `orders/${id}`,
+    }),
     createOrder: builder.mutation({
       query: (body) => ({
         url: `orders`,
@@ -37,5 +40,6 @@ export const Api = createApi({
 export const {
   useGetProductsQuery,
   useGetCategoriesQuery,
+  useGetOrderQuery,
   useCreateOrderMutation,
 } = Api;

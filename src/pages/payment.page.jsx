@@ -3,6 +3,7 @@ import { clearCart } from "@/lib/features/cartSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
+import CartItem from "@/components/CartItem";
 
 function PaymentPage() {
   const cart = useSelector((state) => state.cart.value);
@@ -11,13 +12,9 @@ function PaymentPage() {
   return (
     <main className="px-8">
       <h2 className="text-4xl font-bold">Review Your Order</h2>
-      <div className="mt-4">
+      <div className="mt-4 grid grid-cols-4 gap-x-4">
         {cart.map((item, index) => (
-          <div key={index}>
-            <p>{item.product.name}</p>
-            <p>{item.product.price}</p>
-            <p>{item.quantity}</p>
-          </div>
+          <CartItem key={index} item={item} />
         ))}
       </div>
       <div className="mt-4">

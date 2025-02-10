@@ -1,10 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart } from "./lib/features/cartSlice";
+import { addToCart } from "@/lib/features/cartSlice";
 
 function ProductCard(props) {
-  const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
 
   const handleClick = (e) => {

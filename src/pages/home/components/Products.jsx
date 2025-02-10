@@ -1,9 +1,10 @@
 import { Separator } from "@/components/ui/separator";
 import { useGetCategoriesQuery, useGetProductsQuery } from "@/lib/api";
 import { useState } from "react";
-import { Skeleton } from "./components/ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 import ProductCards from "./ProductCards";
 import Tab from "./Tab";
+
 
 function Products(props) {
   const {

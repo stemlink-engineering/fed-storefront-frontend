@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import CartItem from "@/components/CartItem";
+import { Navigate } from "react-router";
 
 function PaymentPage() {
   const cart = useSelector((state) => state.cart.value);

@@ -5,6 +5,10 @@ import CartItem from "@/components/CartItem";
 function CheckoutPage() {
   const cart = useSelector((state) => state.cart.value);
 
+  if (cart.length === 0) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <main className="px-8">
       <h2 className="text-4xl font-bold">Checkout Page</h2>

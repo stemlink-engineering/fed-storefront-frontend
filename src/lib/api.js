@@ -4,17 +4,18 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 // Define a service using a base URL and expected endpoints
 export const Api = createApi({
   reducerPath: "Api",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api/" }),
-  prepareHeaders: async (headers, { getState }) => {
-    const token = await window.Clerk.session.getToken();
-    console.log(token);
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://localhost:8000/api/",
+    prepareHeaders: async (headers, { getState }) => {
+      const token = await window.Clerk?.session?.getToken();
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
 
-    if (token) {
-      headers.set("Authorization", `Bearer ${token}`);
-    }
+      return headers;
+    },
+  }),
 
-    return headers;
-  },
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: () => `products`,

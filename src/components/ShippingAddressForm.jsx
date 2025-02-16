@@ -39,6 +39,7 @@ const ShippingAddressForm = ({ cart }) => {
   });
   const [createOrder, { isLoading, isError, data }] = useCreateOrderMutation();
   const navigate = useNavigate();
+  console.log(cart);
 
   function handleSubmit(values) {
     createOrder({

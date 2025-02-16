@@ -1,13 +1,11 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-
 // Define a service using a base URL and expected endpoints
 export const Api = createApi({
   reducerPath: "Api",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${BASE_URL}/api/`,
+    baseUrl: "https://fed-storefront-backend-manupa.onrender.com/api/",
     prepareHeaders: async (headers, { getState }) => {
       const token = await window.Clerk?.session?.getToken();
       if (token) {
@@ -35,12 +33,6 @@ export const Api = createApi({
         body,
       }),
     }),
-    createCheckoutSession: builder.mutation({
-      query: () => ({
-        url: `/payment/create-checkout-session`,
-        method: "POST",
-      }),
-    }),
   }),
 });
 
@@ -51,5 +43,4 @@ export const {
   useGetCategoriesQuery,
   useCreateOrderMutation,
   useGetOrderQuery,
-  useCreateCheckoutSessionMutation,
 } = Api;

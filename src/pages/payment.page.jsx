@@ -5,6 +5,11 @@ import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import CartItem from "@/components/CartItem";
 import { Navigate } from "react-router";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from "./CheckoutForm";
+
+const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
+const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
 function PaymentPage() {
   const cart = useSelector((state) => state.cart.value);
@@ -33,14 +38,15 @@ function PaymentPage() {
       </div>
 
       <div className="mt-4">
-        <Button
+        {/* <Button
           onClick={() => {
             dispatch(clearCart());
             toast.success("Order Placed Successfully");
           }}
         >
           Place Order
-        </Button>
+        </Button> */}
+        <CheckoutForm />
       </div>
     </main>
   );

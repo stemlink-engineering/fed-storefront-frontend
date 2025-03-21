@@ -40,20 +40,25 @@ const ShippingAddressForm = ({ cart }) => {
   const [createOrder, { isLoading, isError, data }] = useCreateOrderMutation();
   const navigate = useNavigate();
 
-  function handleSubmit(values) {
-    createOrder({
-      items: cart,
-      shippingAddress: {
-        line_1: values.line_1,
-        line_2: values.line_2,
-        city: values.city,
-        state: values.state,
-        zip_code: values.zip_code,
-        phone: values.phone,
-      },
-    });
-    toast.success("Checkout successful");
-    navigate("/shop/payment");
+ async function handleSubmit(values) {
+    try {
+      const data = await createOrder({
+        items: cart,
+        shippingAddress: {
+          line_1: values.line_1,
+          line_2: values.line_2,
+          city: values.city,
+          state: values.state,
+          zip_code: values.zip_code,
+          phone: values.phone,
+        },
+      }).unwrap();
+      console.log(data);      
+      toast.success("Checkout successful");
+      navigate(`/shop/payment?orderId=${data.orderId}`);
+    } catch (error) {
+      toast.error("Checkout failed");
+    }
   }
 
   return (

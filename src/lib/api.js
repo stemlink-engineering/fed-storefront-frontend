@@ -37,9 +37,12 @@ export const Api = createApi({
     }),
     createCheckoutSession: builder.mutation({
       query: () => ({
-        url: `/payment/create-checkout-session`,
+        url: `payment/create-checkout-session`,
         method: "POST",
       }),
+    }),
+    getCheckoutSessionStatus: builder.query({
+      query: (sessionId) => `payment/session-status?session_id=${sessionId}`,
     }),
   }),
 });
@@ -52,4 +55,5 @@ export const {
   useCreateOrderMutation,
   useGetOrderQuery,
   useCreateCheckoutSessionMutation,
+  useGetCheckoutSessionStatusQuery,
 } = Api;

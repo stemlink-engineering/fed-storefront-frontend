@@ -35,6 +35,7 @@ function CompletePage() {
         
         <div className="mt-6 border-t pt-4">
           <h3 className="text-lg font-semibold mb-2">Order Details:</h3>
+          <p className="mb-2">Order ID: <span className="font-medium">{data.orderId}</span></p>
           <p className="mb-2">Order Status: <span className="font-medium">{data.orderStatus}</span></p>
           <p className="mb-2">Payment Status: <span className="font-medium">{data.paymentStatus}</span></p>
         </div>

@@ -9,12 +9,19 @@ export const Api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}/api/`,
     prepareHeaders: async (headers, { getState }) => {
-      const token = await window.Clerk?.session?.getToken();
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
-      }
-
-      return headers;
+      return new Promise((resolve) => {
+        async function checkToken() {
+          const clerk = window.Clerk;
+          if (clerk) {
+            const token = await clerk.session?.getToken();
+            headers.set("Authorization", `Bearer ${token}`);
+            resolve(headers);
+          } else {
+            setTimeout(checkToken, 500); // try again in 500ms
+          }
+        }
+        checkToken();
+      });
     },
   }),
 
